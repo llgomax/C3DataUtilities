@@ -18,7 +18,7 @@ setup(
         "scipy",
         "numpy",
         "pandas",
-        "pydantic",
+        "pydantic==1.10.12",
         "networkx",
         "psutil",
         "GO-3-data-model",

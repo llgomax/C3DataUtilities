@@ -2193,6 +2193,10 @@ class SolutionEvaluator(object):
         numpy.negative(self.bus_t_float, out=self.bus_t_float) # now bus_t_float contains net power shortfall - called p_{it} in formulation
         #print('bus_t_p_shortfall:')
         #print(self.bus_t_float)
+        
+        # print imbalances
+        numpy.savetxt('bus_t_float_p.csv', self.bus_t_float, delimiter=',')
+        
         self.viol_bus_t_p_balance_max = utils.get_max(self.bus_t_float, idx_lists=[self.problem.bus_uid, self.problem.t_num])
         self.viol_bus_t_p_balance_min = utils.get_min(self.bus_t_float, idx_lists=[self.problem.bus_uid, self.problem.t_num])
         numpy.absolute(self.bus_t_float, out=self.bus_t_float)
@@ -2217,6 +2221,10 @@ class SolutionEvaluator(object):
         numpy.negative(self.bus_t_float, out=self.bus_t_float) # now bus_t_float contains net reactive power shortfall - called q_{it} in formulation
         #print('bus_t_q_shortfall:')
         #print(self.bus_t_float)
+        
+        # print imbalances
+        numpy.savetxt('bus_t_float_q.csv', self.bus_t_float, delimiter=',')
+        
         self.viol_bus_t_q_balance_max = utils.get_max(self.bus_t_float, idx_lists=[self.problem.bus_uid, self.problem.t_num])
         self.viol_bus_t_q_balance_min = utils.get_min(self.bus_t_float, idx_lists=[self.problem.bus_uid, self.problem.t_num])
         numpy.absolute(self.bus_t_float, out=self.bus_t_float)
@@ -3115,7 +3123,13 @@ class SolutionEvaluator(object):
         numpy.multiply(self.acl_t_u_on, self.acl_t_q_fr, out=self.acl_t_q_fr)
         numpy.multiply(self.acl_t_u_on, self.acl_t_p_to, out=self.acl_t_p_to)
         numpy.multiply(self.acl_t_u_on, self.acl_t_q_to, out=self.acl_t_q_to)
-
+        
+        # print line flows
+        numpy.savetxt('acl_t_p_fr.csv', self.acl_t_p_fr, delimiter=',')
+        numpy.savetxt('acl_t_p_to.csv', self.acl_t_p_to, delimiter=',')
+        numpy.savetxt('acl_t_q_fr.csv', self.acl_t_q_fr, delimiter=',')
+        numpy.savetxt('acl_t_q_to.csv', self.acl_t_q_to, delimiter=',')
+        
         if do_debug:
             print('debug:')
             print(debug)
@@ -3257,6 +3271,12 @@ class SolutionEvaluator(object):
         numpy.multiply(self.xfr_t_u_on, self.xfr_t_q_fr, out=self.xfr_t_q_fr)
         numpy.multiply(self.xfr_t_u_on, self.xfr_t_p_to, out=self.xfr_t_p_to)
         numpy.multiply(self.xfr_t_u_on, self.xfr_t_q_to, out=self.xfr_t_q_to)
+        
+        # print xfr flows
+        numpy.savetxt('xfr_t_p_fr.csv', self.xfr_t_p_fr, delimiter=',')
+        numpy.savetxt('xfr_t_p_to.csv', self.xfr_t_p_to, delimiter=',')
+        numpy.savetxt('xfr_t_q_fr.csv', self.xfr_t_q_fr, delimiter=',')
+        numpy.savetxt('xfr_t_q_to.csv', self.xfr_t_q_to, delimiter=',')
 
         if do_debug:
             print('debug:')
